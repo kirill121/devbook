@@ -96,7 +96,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
 	
 	Post.findById(req.params.id)
 		.then(post => {
-			const newComment ={
+			const newComment = {
 				text: req.body.text,
 				name: req.body.name,
 				avatar: req.body.avatar,
