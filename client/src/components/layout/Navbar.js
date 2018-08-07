@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
@@ -10,11 +11,12 @@ class Navbar extends Component {
 		event.preventDefault();
 		this.props.clearCurrentProfile();
 		this.props.logoutUser();
+		this.props.history.push('/');
 	}
 
 	render() {
 		const { isAuthenticated, user } = this.props.auth;
-
+		
 		const authLinks = (
 			<ul className="navbar-nav ml-auto">
 			<li className="nav-item">
@@ -73,4 +75,4 @@ const mapStateToProps = state => ({
 	user: state.user
 })
 
-export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(Navbar);
+export default connect(mapStateToProps, { logoutUser, clearCurrentProfile })(withRouter(Navbar));
